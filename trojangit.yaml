@@ -1,0 +1,69 @@
+port: 7890
+socks-port: 7891
+redir-port: 7892
+mixed-port: 7893
+tproxy-port: 7895
+ipv6: false
+mode: rule
+log-level: silent
+allow-lan: true
+external-controller: 0.0.0.0:9090
+secret: ""
+bind-address: "*"
+unified-delay: true
+profile:
+  store-selected: true
+dns:
+  enable: true
+  ipv6: false
+  enhanced-mode: redir-host
+  listen: 0.0.0.0:7874
+  nameserver:
+    - 8.8.8.8
+    - 1.0.0.1
+    - https://dns.google/dns-query
+  fallback:
+    - 1.1.1.1
+    - 8.8.4.4
+    - https://cloudflare-dns.com/dns-query
+    - 112.215.203.254
+  default-nameserver:
+    - 8.8.8.8
+    - 1.1.1.1
+    - 112.215.203.254
+proxies:
+  - name: bug.com
+    server: bug.com
+    port: 443
+    type: trojan
+    password: 09407f20-e2fa-11ef-8107-1239d0255272
+    skip-cert-verify: true
+    sni: sg2.6n6.net
+    network: ws
+    ws-opts:
+      path: /howdy
+      headers:
+        Host: sg2.6n6.net
+    udp: true
+  - name: 104.26.7.171
+    server: 104.26.7.171
+    port: 443
+    type: trojan
+    password: 866f4d40-e2f9-11ef-9c18-1239d0255272
+    skip-cert-verify: true
+    sni: sg3.6n6.net
+    network: ws
+    ws-opts:
+      path: /howdy
+      headers:
+        Host: sg3.6n6.net
+    udp: true
+proxy-groups:
+  - name: FASTSSH-SSHKIT-HOWDY
+    type: select
+    proxies:
+      - bug.com
+      - 104.26.7.171
+      - DIRECT
+rules:
+  - MATCH,FASTSSH-SSHKIT-HOWDY
