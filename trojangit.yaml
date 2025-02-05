@@ -32,8 +32,8 @@ dns:
     - 1.1.1.1
     - 112.215.203.254
 proxies:
-  - name: bug.com
-    server: bug.com
+  - name: Napi
+    server: 104.22.24.131
     port: 443
     type: trojan
     password: 09407f20-e2fa-11ef-8107-1239d0255272
@@ -45,7 +45,7 @@ proxies:
       headers:
         Host: sg2.6n6.net
     udp: true
-  - name: 104.26.7.171
+  - name: sami
     server: 104.26.7.171
     port: 443
     type: trojan
@@ -62,8 +62,8 @@ proxy-groups:
   - name: FASTSSH-SSHKIT-HOWDY
     type: select
     proxies:
-      - bug.com
-      - 104.26.7.171
+      - Napi
+      - sami
       - DIRECT
 rules:
   - MATCH,FASTSSH-SSHKIT-HOWDY
